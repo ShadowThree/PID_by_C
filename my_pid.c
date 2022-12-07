@@ -4,20 +4,20 @@ TempCtrlDef tempCtrl[PID_CH_NUM];
 
 #if PID_ENABLE_PROCESS_SPLIT
     #if PID_ENABLE_CTRL_DIR_SPLIT
-        const float DIFF_TEMP[PID_CTRL_DIR_NUM] = {5, 5};
-        const PidParamDef PID_PARAM[PID_CTRL_DIR_NUM][PID_CTRL_PROC_NUM] = {    /* FAST       STABLE   */
+        static const float DIFF_TEMP[PID_CTRL_DIR_NUM] = {5, 5};
+        static const PidParamDef PID_PARAM[PID_CTRL_DIR_NUM][PID_CTRL_PROC_NUM] = {    /* FAST       STABLE   */
                                                                                 {{1, 2, 3}, {4, 5, 6}},     /* HEAT */
                                                                                 {{7, 8, 9}, {10, 11, 12}}   /* COLD */
                                                                             };
     #else
-        const float DIFF_TEMP = 5;
-        const PidParamDef PID_PARAM[PID_CTRL_PROC_NUM] = {{1, 5, 3}, {4, 2, 6}};  /* FAST, STABLE */
+        static const float DIFF_TEMP = 5;
+        static const PidParamDef PID_PARAM[PID_CTRL_PROC_NUM] = {{1, 5, 3}, {4, 2, 6}};  /* FAST, STABLE */
     #endif /* PID_ENABLE_CTRL_DIR_SPLIT */
 #else
     #if PID_ENABLE_CTRL_DIR_SPLIT
-        const PidParamDef PID_PARAM[PID_CTRL_DIR_NUM] = {{1, 2, 3}, {4, 5, 6}}; /* HEAT, COLD */
+        static const PidParamDef PID_PARAM[PID_CTRL_DIR_NUM] = {{1, 2, 3}, {4, 5, 6}}; /* HEAT, COLD */
     #else
-        const PidParamDef PID_PARAM = {1, 2, 3};
+        static const PidParamDef PID_PARAM = {1, 2, 3};
     #endif /* PID_ENABLE_CTRL_DIR_SPLIT */
 #endif /* PID_ENABLE_PROCESS_SPLIT */
 
